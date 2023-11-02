@@ -5,6 +5,7 @@ author: |
   | with changes by Nathan Shelly and Sara Sood, Northwestern University. 
 geometry: margin=1in
 ---
+Alan Lopez
 
 In this assignment, you will build your own Sudoku puzzle solver. We've provided starter code in a file named `a5.py`.
 
