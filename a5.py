@@ -160,15 +160,10 @@ def DFS(state: Board) -> Board:
     Returns:
         either None in the case of invalid input or a solved board
     """
-    # Create a stack
     the_stack = Stack([state])
-    # print(the_stack)
-    # 1Add the initial state (root) to the <stack>
-    # 2Choose a node (curr) to examine from the <stack> (if there is nothing in <stack> - FAILURE)
     while not the_stack.is_empty():
         print(the_stack)
         curr = the_stack.pop()
-        # print(curr)
         if curr.goal_test():
             return curr
         elif not curr.failure_test():
@@ -180,11 +175,6 @@ def DFS(state: Board) -> Board:
                 print(row, col, el)
                 the_stack.push(cpy)
 
-    # 3Is curr a goal state?
-    # If so, SOLUTION
-    # If not, continue
-    # 4Expand curr by applying all possible operations (add the new states to the <stack>)
-    # 5Go to step 2
 
     return None
 
@@ -199,7 +189,22 @@ def BFS(state: Board) -> Board:
     Returns:
         either None in the case of invalid input or a solved board
     """
-    pass
+    the_queue = Queue([state])
+    while not the_queue.is_empty():
+        print(the_queue)
+        curr = the_queue.pop()
+        if curr.goal_test():
+            return curr
+        elif not curr.failure_test():
+            row, col = curr.find_most_constrained_cell()
+            sel = curr.rows[row][col]
+            for el in sel:
+                cpy = copy.deepcopy(curr) 
+                cpy.update(row, col, el)
+                print(row, col, el)
+                the_queue.push(cpy)
+
+
 if __name__ == "__main__":
     # b = Board()
     # print(b)
@@ -341,41 +346,41 @@ if __name__ == "__main__":
     #Place the 28 assignments in first_moves on the board.
     for trip in second_moves:
         for trip in first_moves:
-        g.update(trip[0],trip[1],trip[2])
-    g.print_pretty()
-    print(g)
-    print(g.find_most_constrained_cell())
-    print(g.failure_test())
-    g.rows[6][3] = []
-    print(g.find_most_constrained_cell())
-    print(g.failure_test())
-    sol = DFS(g)
-    sol.print_pretty()
-    # print(g.find_most_constrained_cell())
-    # print(g.failure_test())
-    # g.rows[6][3] = []
-    # print(g.find_most_constrained_cell())
-    # print(g.failure_test())
-    # #From the above print statement, you can see which numbers
-    # #  have been assigned to the board, and then create test
-    # #  cases by looking at the board and listing what values are
-    # #  still possible for a specific cell. I have created
-    # #  2 such test cases like that for you. 
-    # assert g.rows[0][2] == [2,5,6], "update test 1"
-    # assert g.rows[5][5] == [3,7,9], "update test 2"
-    # assert g.num_nums_placed == 28, "update test 3"
-    # assert g.find_most_constrained_cell() == (1,7), "fmc test"
-    # assert g.failure_test() == False, "failure test test"
-    # assert g.goal_test() == False, "goal test test"
-    # g.num_nums_placed = 81
-    # assert g.goal_test() == True, "goal test test"
-    # print("All part 2 tests passed! Testing DFS and BFS next:")
-    # print("<<<<<<<<<<<<<< Testing DFS on First Game >>>>>>>>>>>>>>")
-    # test_dfs_or_bfs(True, first_moves)
-    # print("<<<<<<<<<<<<<< Testing DFS on Second Game >>>>>>>>>>>>>>")
-    # test_dfs_or_bfs(True, second_moves)
-    # print("<<<<<<<<<<<<<< Testing BFS on First Game >>>>>>>>>>>>>>")
-    # test_dfs_or_bfs(False, first_moves)
-    # print("<<<<<<<<<<<<<< Testing BFS on Second Game >>>>>>>>>>>>>>")
-    # test_dfs_or_bfs(False, second_moves)
+            g.update(trip[0],trip[1],trip[2])
+            g.print_pretty()
+            print(g)
+            print(g.find_most_constrained_cell())
+            print(g.failure_test())
+            g.rows[6][3] = []
+            print(g.find_most_constrained_cell())
+            print(g.failure_test())
+            sol = DFS(g)
+            sol.print_pretty()
+            # print(g.find_most_constrained_cell())
+            # print(g.failure_test())
+            # g.rows[6][3] = []
+            # print(g.find_most_constrained_cell())
+            # print(g.failure_test())
+            # #From the above print statement, you can see which numbers
+            # #  have been assigned to the board, and then create test
+            # #  cases by looking at the board and listing what values are
+            # #  still possible for a specific cell. I have created
+            # #  2 such test cases like that for you. 
+            # assert g.rows[0][2] == [2,5,6], "update test 1"
+            # assert g.rows[5][5] == [3,7,9], "update test 2"
+            # assert g.num_nums_placed == 28, "update test 3"
+            # assert g.find_most_constrained_cell() == (1,7), "fmc test"
+            # assert g.failure_test() == False, "failure test test"
+            # assert g.goal_test() == False, "goal test test"
+            # g.num_nums_placed = 81
+            # assert g.goal_test() == True, "goal test test"
+            # print("All part 2 tests passed! Testing DFS and BFS next:")
+            # print("<<<<<<<<<<<<<< Testing DFS on First Game >>>>>>>>>>>>>>")
+            # test_dfs_or_bfs(True, first_moves)
+            # print("<<<<<<<<<<<<<< Testing DFS on Second Game >>>>>>>>>>>>>>")
+            # test_dfs_or_bfs(True, second_moves)
+            # print("<<<<<<<<<<<<<< Testing BFS on First Game >>>>>>>>>>>>>>")
+            # test_dfs_or_bfs(False, first_moves)
+            # print("<<<<<<<<<<<<<< Testing BFS on Second Game >>>>>>>>>>>>>>")
+            # test_dfs_or_bfs(False, second_moves)
     pass
